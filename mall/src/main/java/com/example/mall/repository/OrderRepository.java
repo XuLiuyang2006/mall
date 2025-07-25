@@ -16,4 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByUserId(Long userId);
     // 分页查询（用户查询自己的订单）
     Page<Order> findByUserId(Long userId, Pageable pageable);
+    // 根据订单状态查询
+    Page<Order> findByUserIdAndStatus(Long userId, String status, Pageable pageable);
+
 }

@@ -23,12 +23,21 @@ public enum ResultCode {
     LOGIN_ERROR(1007, "用户名或密码错误"),
     USER_UNAUTHORIZED(1008,"用户权限不足"),
 
+    //商品分类相关错误
+    CATEGORY_NOT_FOUND(1105, "商品分类不存在"),
+    CATEGORY_SAVE_FAIL(1106, "商品分类信息为空，保存失败"),
 
     // 购物车相关错误
     CART_ITEM_NOT_FOUND(1101, "购物车中无此商品"),
     CART_ADD_FAILED(1102, "添加到购物车失败"),
     CART_UPDATE_FAILED(1103, "购物车更新失败"),
     CART_REMOVE_FAILED(1104, "购物车删除失败"),
+
+    // 商品评论相关错误
+    REVIEW_NOT_FOUND(2400, "评论不存在"),
+    REVIEW_SAVE_FAIL(2401, "评论保存失败"),
+
+
 
     //订单相关错误
     ORDER_CANNOT_CANCEL(4005, "订单不可取消"),
@@ -42,6 +51,8 @@ public enum ResultCode {
 
     //订单支付相关内容
     ORDER_ALREADY_PAID(4011, "订单已支付"),
+
+
 
 
 

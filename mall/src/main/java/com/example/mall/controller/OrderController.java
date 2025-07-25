@@ -41,10 +41,28 @@ public class OrderController {
         return Result.success(orderService.listOrdersByMe(userId));
     }
 
+//    @GetMapping("/list")
+//    public Result<List<Order>> listAllOrders() {
+//        return Result.success(orderService.getAllOrders());
+//    }
+
+    // OrderController.java
     @GetMapping("/list")
-    public Result<List<Order>> listAllOrders() {
-        return Result.success(orderService.getAllOrders());
+    public Result<Page<Order>> listOrders(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String status,
+            HttpSession session) {
+
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            throw new BizException(ResultCode.UNAUTHORIZED);
+        }
+
+        Page<Order> orders = orderService.getUserOrders(userId, status, page, size);
+        return Result.success(orders);
     }
+
 
     @GetMapping("/{id}")
     public Result<Order> getOrderById(@PathVariable Long id) {
@@ -80,5 +98,6 @@ public class OrderController {
         orderService.deleteOrder(id);
         return Result.success();
     }
+
 
 }

@@ -21,7 +21,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,10 +76,11 @@ public class OrderServiceImpl implements OrderService {
         return savedOrder;
     }
 
-    @Override
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
-    }
+//    @Override
+//    public List<Order> getAllOrders() {
+//        return orderRepository.findAll();
+//    }
+
 
     @Override
     public Order getOrderById(Long id) {
@@ -161,5 +161,17 @@ public class OrderServiceImpl implements OrderService {
         order.setPayTime(LocalDateTime.now());
         orderRepository.save(order);
     }
+
+    @Override
+    public Page<Order> getUserOrders(Long userId, String status, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdTime"));
+
+        if (status != null && !status.isEmpty()) {
+            return orderRepository.findByUserIdAndStatus(userId, status, pageable);
+        } else {
+            return orderRepository.findByUserId(userId, pageable);
+        }
+    }
+
 
 }
