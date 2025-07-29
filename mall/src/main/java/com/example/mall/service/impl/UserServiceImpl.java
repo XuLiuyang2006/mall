@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -53,7 +54,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new BizException(ResultCode.USER_NOT_FOUND));
         UserDTO dto = new UserDTO();
-        BeanUtils.copyProperties(user, dto);
+        BeanUtils.copyProperties(user, dto);// 将User对象的属性复制到UserDTO对象中
+        // BeanUtils.copyProperties() 方法用于将一个对象的属性值复制到另一个对象中
+        // 这里的user对象是从数据库中查询到的用户信息，dto对象是要返回给前端的用户信息
         return dto;
     }
 
@@ -71,14 +74,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long getCurrentUserId() {
         Object userId = session.getAttribute("userId");
-        if (userId == null) {
-            throw new BizException(ResultCode.UNAUTHORIZED);
-        }
+//        if (userId == null) {
+//            throw new BizException(ResultCode.UNAUTHORIZED);
+//        }// 这里的登录验证可以在Controller中使用@LoginRequired注解来处理，所以这里可以省略
         return (Long) userId;
     }
 
     @Override
+    @Transactional
     public void updateUser(User updatedUser) {
+
+//        Object userIdObj = session.getAttribute("userId");
+//        if (userIdObj == null) {
+//            throw new BizException(ResultCode.UNAUTHORIZED, "请先登录");
+//        }//Controller中使用@LoginRequired注解来处理登录验证了，这里的代码可以省略
+
         Long userId = getCurrentUserId(); // 获取当前登录用户ID
         User existingUser = userRepository.findById(userId)
                 .orElseThrow(() -> new BizException(ResultCode.USER_NOT_FOUND));

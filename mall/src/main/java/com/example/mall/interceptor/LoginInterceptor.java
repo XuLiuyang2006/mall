@@ -17,7 +17,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         HttpSession session = request.getSession(false); // false 表示不创建新Session
         if (session == null || session.getAttribute("userId") == null) {
-            throw new BizException(ResultCode.UNAUTHORIZED);
+            throw new BizException(ResultCode.UNAUTHORIZED);// 未登录异常
         }
         return true; // 已登录，放行
     }

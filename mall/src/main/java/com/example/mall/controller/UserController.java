@@ -1,5 +1,6 @@
 package com.example.mall.controller;
 
+import com.example.mall.annotation.LoginRequired;
 import com.example.mall.dto.LoginDTO;
 import com.example.mall.dto.UserDTO;
 import com.example.mall.entity.User;
@@ -41,6 +42,7 @@ public class UserController {
      * 获取当前登录用户信息
      */
     @GetMapping("/me")
+    @LoginRequired
     public Result<UserDTO> getUserInfo() {
 
         UserDTO userDTO = userService.getUserById(userService.getCurrentUserId());
@@ -51,6 +53,7 @@ public class UserController {
      * 修改当前用户信息
      */
     @PutMapping("/me")
+    @LoginRequired
     public Result<?> updateUser(@RequestBody User user) {
         userService.updateUser(user);
         return Result.success("更新成功");

@@ -4,6 +4,7 @@ import com.example.mall.entity.UserAddress;
 import com.example.mall.enums.ResultCode;
 import com.example.mall.exception.BizException;
 import com.example.mall.repository.UserAddressRepository;
+import com.example.mall.repository.UserRepository;
 import com.example.mall.service.UserAddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.List;
 public class UserAddressServiceImpl implements UserAddressService {
 
     private final UserAddressRepository addressRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserAddress addAddress(UserAddress address) {
@@ -55,7 +57,9 @@ public class UserAddressServiceImpl implements UserAddressService {
         UserAddress target = addressRepository.findById(addressId)
                 .orElseThrow(() -> new BizException(ResultCode.ADDRESS_NOT_FOUND));
         if (!target.getUserId().equals(userId)) {
-            throw new BizException(ResultCode.ADDRESS_UNAUTHORIZED);
+            if(!userRepository.getById(userId).isAdmin()){
+                throw new BizException(ResultCode.ADDRESS_UNAUTHORIZED);// 如果用户不是管理员，抛出未授权异常
+            }
         }
         target.setIsDefault(true);
         addressRepository.save(target);

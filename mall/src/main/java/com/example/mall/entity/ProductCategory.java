@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "product_category")
+@Table(name = "product_category")// 商品分类表
 @Data
 public class ProductCategory {
 
