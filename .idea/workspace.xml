@@ -4,28 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1fedbf5c-03ff-43a4-874a-77613a714811" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/ProductCategoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/ProductReviewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/dto/ProductCategoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/dto/ProductReviewDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/entity/ProductCategory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/entity/ProductReview.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/enums/OrderStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/repository/ProductCategoryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/repository/ProductReviewRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/ProductCategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/ProductReviewService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/impl/ProductCategoryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/impl/ProductReviewServiceImpl.java" afterDir="false" />
+    <list default="true" id="1fedbf5c-03ff-43a4-874a-77613a714811" name="Changes" comment="本次提交新增切面类（aspect），可以实现日志打印（usercontroller和allcontroller）。使用@interface自定义注解LoginRequired对session校验是否登录。">
+      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/annotation/AdminOnly.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/AdminCheckAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/ExecutionTimeAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aspect/AuthAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/AuthAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aspect/LogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/LogAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/ProductCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/ProductCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/enums/ResultCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/enums/ResultCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/service/impl/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +34,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -65,6 +61,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2ze3BrFkgE7PajEbpbWuiA2Bd9U" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
@@ -93,7 +92,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -150,11 +149,38 @@
       <workItem from="1753144566563" duration="42857000" />
       <workItem from="1753315077089" duration="32349000" />
       <workItem from="1753406782834" duration="14808000" />
-      <workItem from="1753453326233" duration="884000" />
+      <workItem from="1753453326233" duration="1604000" />
+      <workItem from="1753541861346" duration="6800000" />
+      <workItem from="1753622149046" duration="3814000" />
+      <workItem from="1753661396602" duration="28963000" />
+      <workItem from="1753748421571" duration="26362000" />
+      <workItem from="1753833682829" duration="10324000" />
     </task>
+    <task id="LOCAL-00001" summary="本次提交新增地址，评论，功能">
+      <option name="closed" value="true" />
+      <created>1753454318184</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753454318184</updated>
+    </task>
+    <task id="LOCAL-00002" summary="本次提交新增切面类（aspect），可以实现日志打印（usercontroller和allcontroller）。使用@interface自定义注解LoginRequired对session校验是否登录。">
+      <option name="closed" value="true" />
+      <created>1753793594468</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753793594468</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="本次提交新增地址，评论，功能" />
+    <MESSAGE value="本次提交新增切面类（aspect），可以实现日志打印（usercontroller和allcontroller）。使用@interface自定义注解LoginRequired对session校验是否登录。" />
+    <option name="LAST_COMMIT_MESSAGE" value="本次提交新增切面类（aspect），可以实现日志打印（usercontroller和allcontroller）。使用@interface自定义注解LoginRequired对session校验是否登录。" />
   </component>
 </project>

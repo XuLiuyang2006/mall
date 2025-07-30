@@ -1,5 +1,6 @@
-package com.example.mall.controller;
+package com.example.mall.aop;
 
+import com.example.mall.annotation.AdminOnly;
 import com.example.mall.dto.ProductDTO;
 import com.example.mall.entity.Product;
 import com.example.mall.enums.ResultCode;
@@ -52,7 +53,7 @@ public class ProductController {
     /**
      * 新增商品
      */
-
+    @AdminOnly // 假设有一个注解用于限制管理员权限
     @PostMapping("/add")
     public Result<ProductDTO> createProduct(@RequestBody Product product) {
         return Optional.ofNullable(product)
@@ -64,6 +65,7 @@ public class ProductController {
     /**
      * 修改商品
      */
+    @AdminOnly// 假设有一个注解用于限制管理员权限
     @PutMapping("/{id}")
     public Result<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody Product product) {
         return productRepository.findById(id)
@@ -84,6 +86,7 @@ public class ProductController {
     /**
      * 上传商品图片
      */
+    @AdminOnly // 假设有一个注解用于限制管理员权限
     @PostMapping("/upload")
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file,
                                               @RequestParam("productId") Long productId) {
@@ -117,6 +120,7 @@ public class ProductController {
     /**
      * 删除商品
      */
+    @AdminOnly // 假设有一个注解用于限制管理员权限
     @DeleteMapping("/{id}")
     public Result<Void> deleteProduct(@PathVariable Long id) {
         return Optional.ofNullable(productService.getById(id))

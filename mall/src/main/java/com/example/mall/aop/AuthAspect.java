@@ -1,4 +1,4 @@
-package com.example.mall.aspect;
+package com.example.mall.aop;
 
 import com.example.mall.enums.ResultCode;
 import com.example.mall.exception.BizException;

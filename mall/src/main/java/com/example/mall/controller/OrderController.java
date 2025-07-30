@@ -1,7 +1,7 @@
 package com.example.mall.controller;
 
+import com.example.mall.annotation.AdminOnly;
 import com.example.mall.dto.OrderDTO;
-import com.example.mall.dto.UserDTO;
 import com.example.mall.entity.Order;
 import com.example.mall.enums.ResultCode;
 import com.example.mall.exception.BizException;
@@ -25,13 +25,9 @@ public class OrderController {
     private final UserService userService;
 
     //GET操作
+    @AdminOnly// 假设有一个注解用于限制管理员权限
     @GetMapping("/user/{userId}")//这个查询的范围大，权限得给管理人员，用户查询自己的订单列表需要单独操作
     public Result<List<Order>> listOrderByUserId(@PathVariable Long userId){
-        //先验证身份是否为管理人员
-        UserDTO userDTO = userService.getUserById(userService.getCurrentUserId());
-        if(!userDTO.isAdmin()){
-            throw new BizException(ResultCode.USER_UNAUTHORIZED);
-        }
         return Result.success(orderService.listOrdersByUser(userId));
     }
 

@@ -47,6 +47,16 @@ public class UserServiceImpl implements UserService {
             throw new BizException(ResultCode.LOGIN_ERROR);
         }
         session.setAttribute("userId", user.getId()); // 登录成功后写入 Session
+//        UserDTO userDTO = userToDTO(user); // 将User对象转换为UserDTO对象
+        if(user.isAdmin()){
+            user.setRole("admin"); // 如果是管理员，设置角色为admin
+        }else {
+            user.setRole("user"); // 如果是普通用户，设置角色为user
+        }
+        userRepository.save(user); // 保存更新后的用户信息
+        UserDTO userDTO = new UserDTO(); // 使用BeanUtils将User对象转换为UserDTO对象
+        BeanUtils.copyProperties(user, userDTO); // 将User对象的属性复制到UserDTO对象中
+        session.setAttribute("currentUser", userDTO); // 可选：存储当前用户信息到Session
     }
 
     @Override
@@ -99,6 +109,19 @@ public class UserServiceImpl implements UserService {
         existingUser.setAvatarUrl(updatedUser.getAvatarUrl());
 
         userRepository.save(existingUser); // 保存更新后的用户信息
+    }
+
+    private UserDTO userToDTO(User user) {
+        UserDTO dto = new UserDTO();
+        dto.setId(user.getId());
+        dto.setUsername(user.getUsername());
+        dto.setEmail(user.getEmail());
+        dto.setPhone(user.getPhone());
+        dto.setAvatarUrl(user.getAvatarUrl());
+        dto.setAdmin(user.isAdmin());
+
+        // 这里可以添加更多的转换逻辑，比如处理头像URL等
+        return dto;
     }
 
 }

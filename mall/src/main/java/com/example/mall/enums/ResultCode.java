@@ -10,6 +10,7 @@ public enum ResultCode {
     NOT_FOUND(404, "资源不存在"),
     UNAUTHORIZED(401, "未授权"),
     TOKEN_INVALID(401, "缺少或无效的Token"),
+    FORBIDDEN(403, "禁止访问"),
 
     // 商品相关错误
     PRODUCT_NOT_FOUND(1001, "商品不存在"),
