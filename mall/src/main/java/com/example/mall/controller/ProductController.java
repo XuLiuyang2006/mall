@@ -1,6 +1,7 @@
-package com.example.mall.aop;
+package com.example.mall.controller;
 
 import com.example.mall.annotation.AdminOnly;
+import com.example.mall.annotation.OperationLog;
 import com.example.mall.dto.ProductDTO;
 import com.example.mall.entity.Product;
 import com.example.mall.enums.ResultCode;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@OperationLog("商品管理操作日志") // 假设有一个注解用于记录操作日志
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -29,6 +31,7 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+    //GET
     /**
      * 获取所有商品
      */
@@ -50,6 +53,27 @@ public class ProductController {
                 .orElseGet(() -> Result.error(ResultCode.PRODUCT_NOT_FOUND));
     }
 
+    @GetMapping("/search")
+    public Result<Page<ProductDTO>> searchProducts(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Page<ProductDTO> result = productService.searchProducts(keyword, page, size);
+        return Result.success(result);
+    }
+
+
+    @GetMapping("/page")
+    public Result<Page<ProductDTO>> getProductPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Page<ProductDTO> resultPage = productService.getProductPage(page, size);
+        return Result.success(resultPage);
+    }
+
+
+    //POST
     /**
      * 新增商品
      */
@@ -60,27 +84,6 @@ public class ProductController {
                 .map(productService::save)
                 .map(Result::success)
                 .orElseGet(() -> Result.error(ResultCode.PRODUCT_SAVE_FAIL));
-    }
-
-    /**
-     * 修改商品
-     */
-    @AdminOnly// 假设有一个注解用于限制管理员权限
-    @PutMapping("/{id}")
-    public Result<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return productRepository.findById(id)
-                .map(existing -> {
-                    existing.setName(product.getName());
-                    existing.setDescription(product.getDescription());
-                    existing.setPrice(product.getPrice());
-                    existing.setStock(product.getStock());
-                    // 不修改图片
-                    Product updated = productRepository.save(existing);
-                    return Result.success(productService.getById(updated.getId()));
-                    //updated.getId() 调用的是Product对象，返回的是更新后的商品ID
-                    //productService.getById(updated.getId()) 调用的是ProductService接口，返回的是更新后的商品DTO
-                })
-                .orElseGet(() -> Result.error(ResultCode.PRODUCT_NOT_FOUND));
     }
 
     /**
@@ -117,6 +120,31 @@ public class ProductController {
                 ).orElseGet(() -> ResponseEntity.badRequest().body("商品不存在，无法上传图片"));
     }
 
+
+    //PUT
+    /**
+     * 修改商品
+     */
+    @AdminOnly// 假设有一个注解用于限制管理员权限
+    @PutMapping("/{id}")
+    public Result<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        return productRepository.findById(id)
+                .map(existing -> {
+                    existing.setName(product.getName());
+                    existing.setDescription(product.getDescription());
+                    existing.setPrice(product.getPrice());
+                    existing.setStock(product.getStock());
+                    // 不修改图片
+                    Product updated = productRepository.save(existing);
+                    return Result.success(productService.getById(updated.getId()));
+                    //updated.getId() 调用的是Product对象，返回的是更新后的商品ID
+                    //productService.getById(updated.getId()) 调用的是ProductService接口，返回的是更新后的商品DTO
+                })
+                .orElseGet(() -> Result.error(ResultCode.PRODUCT_NOT_FOUND));
+    }
+
+
+    //DELETE
     /**
      * 删除商品
      */
@@ -131,22 +159,5 @@ public class ProductController {
                 .orElseGet(() -> Result.error(ResultCode.PRODUCT_DELETE_FAIL));
     }
 
-    @GetMapping("/search")
-    public Result<Page<ProductDTO>> searchProducts(
-            @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        Page<ProductDTO> result = productService.searchProducts(keyword, page, size);
-        return Result.success(result);
-    }
 
-
-    @GetMapping("/page")
-    public Result<Page<ProductDTO>> getProductPage(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-
-        Page<ProductDTO> resultPage = productService.getProductPage(page, size);
-        return Result.success(resultPage);
-    }
 }

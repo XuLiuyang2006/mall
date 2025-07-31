@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.METHOD) // 该注解可以应用于方法
+@Target({ElementType.METHOD,ElementType.TYPE}) // 该注解可以应用于方法
 @Retention(RetentionPolicy.RUNTIME)// 该注解在运行时仍然可用
 public @interface OperationLog {
     String value() default ""; // 操作描述，可以在使用注解时提供具体的操作信息

@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1fedbf5c-03ff-43a4-874a-77613a714811" name="Changes" comment="本次提交内容为：使用aop切面自动校验用户身份是不是管理员，自动检测UserController类中方法的运行时间。使用的是自定义注解和切面类">
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/annotation/OperationLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/OperationLogAspect.java" afterDir="false" />
+    <list default="true" id="1fedbf5c-03ff-43a4-874a-77613a714811" name="Changes" comment="本次提交新增打印操作日志OperationLog">
+      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/annotation/NoLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/annotation/SensitiveField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/ExceptionLogAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/SensitiveFieldAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/annotation/LoginRequired.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/annotation/LoginRequired.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/AuthAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/LoginAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mall/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/MallApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/MallApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/annotation/OperationLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/annotation/OperationLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/LogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/LogAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/OperationLogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/aop/OperationLogAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/main/java/com/example/mall/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/logs/access.log" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/logs/access.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/logs/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/logs/error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nginx/logs/nginx.pid" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/logs/nginx.pid" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +157,18 @@
       <workItem from="1753661396602" duration="28963000" />
       <workItem from="1753748421571" duration="26362000" />
       <workItem from="1753833682829" duration="20804000" />
-      <workItem from="1753931399806" duration="646000" />
+      <workItem from="1753931399806" duration="37775000" />
+      <workItem from="1754114231425" duration="2601000" />
+      <workItem from="1754129233553" duration="977000" />
+      <workItem from="1754130512609" duration="9000" />
+      <workItem from="1754234561065" duration="117000" />
+      <workItem from="1754274248479" duration="419000" />
+      <workItem from="1754280831946" duration="9211000" />
+      <workItem from="1754352675744" duration="4000" />
+      <workItem from="1754358568797" duration="16000" />
+      <workItem from="1754386506140" duration="18000" />
+      <workItem from="1754388295634" duration="29000" />
+      <workItem from="1754389793264" duration="4000" />
     </task>
     <task id="LOCAL-00001" summary="本次提交新增地址，评论，功能">
       <option name="closed" value="true" />
@@ -180,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753850686192</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="本次提交新增打印操作日志OperationLog">
+      <option name="closed" value="true" />
+      <created>1753932891854</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753932891854</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +213,7 @@
     <MESSAGE value="本次提交新增切面类（aspect），可以实现日志打印（usercontroller和allcontroller）。使用@interface自定义注解LoginRequired对session校验是否登录。" />
     <MESSAGE value="本次更新内容为：使用aop切面自动校验用户身份是不是管理员，自动检测UserController类中方法的运行时间。使用的是自定义注解和切面类" />
     <MESSAGE value="本次提交内容为：使用aop切面自动校验用户身份是不是管理员，自动检测UserController类中方法的运行时间。使用的是自定义注解和切面类" />
-    <option name="LAST_COMMIT_MESSAGE" value="本次提交内容为：使用aop切面自动校验用户身份是不是管理员，自动检测UserController类中方法的运行时间。使用的是自定义注解和切面类" />
+    <MESSAGE value="本次提交新增打印操作日志OperationLog" />
+    <option name="LAST_COMMIT_MESSAGE" value="本次提交新增打印操作日志OperationLog" />
   </component>
 </project>

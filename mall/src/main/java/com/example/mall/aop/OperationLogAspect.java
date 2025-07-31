@@ -1,32 +1,35 @@
 package com.example.mall.aop;
 
+import com.example.mall.annotation.NoLog;
 import com.example.mall.annotation.OperationLog;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
 
 @Aspect
 @Component
 @Slf4j
 public class OperationLogAspect {
-    // 这里可以添加切点和通知方法来记录操作日志
-    // 例如，使用 @Before、@After、@Around 等注解来定义切点和通知方法
-
-    // 示例：记录方法执行时间
-    // @Around("execution(* com.example.mall.service..*(..))")
-    // public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-    //     long start = System.currentTimeMillis();
-    //     Object proceed = joinPoint.proceed();
-    //     long executionTime = System.currentTimeMillis() - start;
-    //     log.info("Method {} executed in {} ms", joinPoint.getSignature(), executionTime);
-    //     return proceed;
-    // }
 
     @Around("@annotation(operationLog)")
     public Object LogOperation(ProceedingJoinPoint proceedingJoinPoint, OperationLog operationLog) throws Throwable{
         String methodName = proceedingJoinPoint.getSignature().toShortString();
+
+        MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
+        Method method = signature.getMethod();
+        Class<?> targetClass = proceedingJoinPoint.getTarget().getClass();
+
+        // 检查方法或类上是否有 @NoLog 注解
+        if (method.isAnnotationPresent(NoLog.class) || targetClass.isAnnotationPresent(NoLog.class)) {
+            return proceedingJoinPoint.proceed(); // 直接执行，不记录日志
+        }
+
+
         Object[] args = proceedingJoinPoint.getArgs();
         long startTime = System.currentTimeMillis();
 
