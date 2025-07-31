@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Aspect// AspectJ 注解，表示这是一个切面类
 @Component// Spring 注解，表示这是一个 Spring 组件,自动注册到 Spring 容器中
 @RequiredArgsConstructor// 使用 Lombok 的 @RequiredArgsConstructor 注解来自动生成构造函数
-public class AuthAspect {// 切面类，用于处理登录验证
+public class LoginAspect {// 切面类，用于处理登录验证
 
     private final HttpSession session;// 注入 HttpSession，用于获取当前用户的登录状态
 

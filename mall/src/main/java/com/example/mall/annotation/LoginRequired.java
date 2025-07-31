@@ -18,4 +18,5 @@ import java.lang.annotation.*;
 // 这个注解可以用于标记需要登录才能访问的方法
 //@interface 的 @是 Java 中定义注解的关键字，表示这是一个注解类型
 public @interface LoginRequired {
+//    String value() default ""; // 可选的描述信息，可以在使用注解时提供具体的操作信息
 }
